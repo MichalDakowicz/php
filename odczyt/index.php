@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -8,32 +11,26 @@
 </head>
 <body>
 
+
+
 <form action="wynik.php" method="post">
-    <input type="text" name="imie" id="Imie" placeholder="Imię" required>
-    <input type="text" name="nazwisko" id="Nazwisko" placeholder="Nazwisko" required>
-    <input type="number" name="numer-telefonu" id="numer-telefonu" placeholder="Numer telefonu" required>
+
+    <input type="text" name="username" id="username" placeholder="Nazwa Urzytkownika" required>
+    <input type="password" name="password" id="password" placeholder="Hasło" required>
+    <input type="password" name="password2" id="password2" placeholder="Powtórz Hasło" required>
+    <?php
+    if (isset($_SESSION['error_message'])) {
+        echo '<b>' . $_SESSION['error_message'] . '</b>';
+        unset($_SESSION['error_message']);
+    }
+    ?>
     <input type="email" name="email" id="email" placeholder="E-mail" required>
-    <textarea name="info" id="info" rows="4" cols="30" required></textarea>
-    <select name="jezyk-programowania" id="jezyk-programowania" required>
-        <option value="C++">C++</option>
-        <option value="Python">Python</option>
-        <option value="JavaScript">JavaScript</option>
-        <option value="PHP">PHP</option>
-    </select>
-
-    <div class="radio-group">
-        <input type="radio" name="plec" id="mezczyzna" value="Mężczyzna" required>
-        <label for="mezczyzna">Mężczyzna</label>
-        <input type="radio" name="plec" id="kobieta" value="Kobieta" required>
-        <label for="kobieta">Kobieta</label>
-    </div>
-
-    <input type="checkbox" name="przetwarzanie-danych" id="przetwarzanie-danych">
+    <input type="number" name="numer-telefonu" id="numer-telefonu" placeholder="Numer telefonu" required>
+    <input type="checkbox" name="przetwarzanie-danych" id="przetwarzanie-danych" required>
     <label for="przetwarzanie-danych">Wyrażam zgodę na przetwarzanie danych osobowych</label>
 
     <button type="submit">Wyślij</button>
 </form>
 
 </body>
-
 </html>
