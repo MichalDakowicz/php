@@ -4,13 +4,11 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
     
-    // Validate username
     $username = $_POST['username'] ?? '';
     if (strlen($username) < 5) {
         $errors[] = "Nazwa użytkownika musi mieć minimum 5 znaków";
     }
 
-    // Validate password
     $password = $_POST['password'] ?? '';
     $password2 = $_POST['password2'] ?? '';
     if (strlen($password) < 8) {
@@ -20,26 +18,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Hasła nie są identyczne";
     }
 
-    // Validate email
     $email = $_POST['email'] ?? '';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Niepoprawny format adresu email";
     }
 
-    // Validate number
     $numer = $_POST['numer'] ?? '';
     if (!is_numeric($numer) || $numer < 18 || $numer > 100) {
         $errors[] = "Numer musi być między 18 a 100";
     }
 
-    // Check for errors
     if (!empty($errors)) {
         $_SESSION['error_message'] = "<ul><li>" . implode("</li><li>", $errors) . "</li></ul>";
         header('Location: index.php');
         exit();
     }
 
-    // If validation passed, display the results
 ?>
 <!DOCTYPE html>
 <html lang="pl">
